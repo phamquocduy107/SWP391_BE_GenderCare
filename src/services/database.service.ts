@@ -1,7 +1,4 @@
 import { Pool, PoolConfig } from 'pg'
-import dotenv from 'dotenv'
-
-dotenv.config()
 
 // Database configuration
 const dbConfig: PoolConfig = {
@@ -9,7 +6,7 @@ const dbConfig: PoolConfig = {
   host: 'localhost',
   database: 'postgres',
   password: 'mysecretpassword',
-  port: 5436,
+  port: 5431,
   // Optional: Configure connection pool
   max: 20, // Maximum number of clients in the pool
   idleTimeoutMillis: 30000, // How long a client is allowed to remain idle before being closed
@@ -20,11 +17,11 @@ const dbConfig: PoolConfig = {
 const pool = new Pool(dbConfig)
 
 // Test the connection
-pool.connect((err, client, release) => {
+pool.connect((err: any, client: any, release: any) => {
   if (err) {
     console.error('Error connecting to the database:', err.stack)
   } else {
-    console.log('Successfully connected to PostgreSQL database')
+    console.log('Successfully connected to PostgreSQL database', dbConfig.port)
     release()
   }
 })

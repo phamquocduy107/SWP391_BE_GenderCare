@@ -1,14 +1,23 @@
-version: '3.1'
+version: '3.8'
 
 services:
-  db:
+  postgres:
     image: postgres:latest
-    restart: always
+    container_name: postgres_db
     environment:
-      POSTGRES_USER: harrydo29
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mysecretpassword
-      POSTGRES_DB: swp391-postgres
+      POSTGRES_DB: postgres
     ports:
-      - '5436:5432'
+      - '5431:5432' # Map container port 5432 to host port 5436
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - postgres_network
+
+volumes:
+  postgres_data:
+
+networks:
+  postgres_network:
+    driver: bridge
