@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: harrydo29
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: swp391-postgres
+    ports:
+      - '5436:5432'
+    volumes:
+      - db_data:/var/lib/postgresql/data
