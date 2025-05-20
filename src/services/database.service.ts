@@ -1,12 +1,15 @@
 import { Pool, PoolConfig } from 'pg'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 // Database configuration
 const dbConfig: PoolConfig = {
-  user: 'postgres',
-  host: 'localhost',
-  database: 'postgres',
-  password: 'mysecretpassword',
-  port: 5431,
+  user: process.env.DB_USER as string,
+  host: process.env.DB_HOST as string,
+  database: process.env.DB_NAME as string,
+  password: process.env.DB_PASSWORD as string,
+  port: parseInt(process.env.DB_PORT as string),
   // Optional: Configure connection pool
   max: 20, // Maximum number of clients in the pool
   idleTimeoutMillis: 30000, // How long a client is allowed to remain idle before being closed
